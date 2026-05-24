@@ -27,7 +27,7 @@ export const NoteEditorPage: React.FC = () => {
   const navigate = useNavigate()
   const { id } = useParams<{ id: string }>()
 
-  const [note, setNote] = useState<NoteResponse | null>(null)
+
   const [isLoading, setIsLoading] = useState(!!id)
   const [isSaving, setIsSaving] = useState(false)
   const [error, setError] = useState<string>('')
@@ -45,7 +45,6 @@ export const NoteEditorPage: React.FC = () => {
       try {
         setIsLoading(true)
         const fetchedNote = await fetchNote(parseInt(id))
-        setNote(fetchedNote)
         setFormData({
           title: fetchedNote.title,
           content: fetchedNote.content,

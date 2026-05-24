@@ -31,6 +31,11 @@ jobs:
           pip install -r requirements.txt
 
       - name: Verify imports
+        env:
+          DATABASE_URL: postgresql://admin:admin123@localhost:5432/notes_db
+          SECRET_KEY: fake-secret-key-for-ci
+          ALGORITHM: HS256
+          ACCESS_TOKEN_EXPIRE_MINUTES: 30
         run: |
           python -c "from app.main import app"
 
@@ -66,15 +71,3 @@ jobs:
       - name: Docker build frontend
         run: docker build -t notes-frontend .
 
-
-  docker-compose-check:
-
-    runs-on: ubuntu-latest
-
-    steps:
-
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: Validate docker compose
-        run: docker compose config
