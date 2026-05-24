@@ -5,7 +5,7 @@ import {
   fetchNote,
   updateNote,
 } from '../services/notesService'
-import { NoteResponse } from '../types'
+
 import { AxiosError } from 'axios'
 
 /**
